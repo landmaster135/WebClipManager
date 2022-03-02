@@ -8,25 +8,43 @@
 async function writeSheetAndRemoveFiles(folderId=TEMPORARY_TEXT_FOLDER_ID, mimeTypes=["text/plain"]){
   const funcName = "writeSheetAndRemoveFiles";
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
-  const textFileIdArray = getFileIdArrayInTheFolder(folderId, mimeTypes); // できた
-  // const textFileIdArray = getFileIdArrayInTheFolder(folderId, "text/plain"); // できた
+  const textFileIdArray = getFileIdArrayInTheFolder(folderId, mimeTypes);
+  // const textFileIdArray = getFileIdArrayInTheFolder(folderId, "text/plain");
   console.log(`${funcName}: ${getStrRepeatedToMark("b")}: `);
-  let dateArray      = getDateArrayFromFileIdArray(textFileIdArray); // できた
+  let dateArray      = getDateArrayFromFileIdArray(textFileIdArray);
   console.log(`${funcName}: ${getStrRepeatedToMark("c")}: `);
-  let urlArray       = getTextArrayFromFileIdArray(textFileIdArray); // できた
+  let urlArray       = getTextArrayFromFileIdArray(textFileIdArray);
   console.log(`${funcName}: ${getStrRepeatedToMark("d")}: `);
-  let siteTitleArray = await getSiteTitleArrayFromUrlArray(urlArray); // できた
+  let siteTitleArray = await getSiteTitleArrayFromUrlArray(urlArray);
   console.log(`${funcName}: ${getStrRepeatedToMark("e")}: `);
+
+  // TODO:URLでヒットしなかった要素のインデックスを消す処理（utilToManipulateArray.gsにある処理を使う）
+  // manipulate arrays if an element in siteTitleArray is replaced by REPLACING_WORD_WHEN_TITLE_IS_NULL.
+  // replacedIndices = getIndicesByReplacingWord(siteTitleArray);
+  // console.log(`${funcName}: ${getStrRepeatedToMark("f")}: `);
+  // dateArrayRemoved      = getArrayRemovedElementsByIndices(dateArray, replacedIndices);
+  // urlArrayRemoved       = getArrayRemovedElementsByIndices(urlArray, replacedIndices);
+  // siteTitleArrayRemoved = getArrayRemovedElementsByIndices(siteTitleArray, replacedIndices);
+  // console.log(`${funcName}: ${getStrRepeatedToMark("g")}: `);
+
+  // console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
+  // console.log(dateArrayRemoved.length)
+  // console.log(urlArrayRemoved.length)
+  // console.log(siteTitleArrayRemoved.length)
+  // console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||")
 
   // for test
   // dateArray      = [0,1,2,4];
   // siteTitleArray = [2,4,8,9];
   // urlArray       = [5,7,1,5];
-  
-  const dateObj  = applyColumnIndexToInfoArray(COLUMN_FOR_DATE_1ST, dateArray); // できた
-  const titleObj = applyColumnIndexToInfoArray(COLUMN_FOR_TITLE_1ST, siteTitleArray); // できた
-  const urlObj   = applyColumnIndexToInfoArray(COLUMN_FOR_URL_1ST, urlArray); // できた
-  const integratedObj = integrateObjToWriteGSS(dateObj, titleObj, urlObj); // できた
+
+  const dateObj  = applyColumnIndexToInfoArray(COLUMN_FOR_DATE_1ST, dateArray);
+  const titleObj = applyColumnIndexToInfoArray(COLUMN_FOR_TITLE_1ST, siteTitleArray);
+  const urlObj   = applyColumnIndexToInfoArray(COLUMN_FOR_URL_1ST, urlArray);
+  // const dateObj  = applyColumnIndexToInfoArray(COLUMN_FOR_DATE_1ST, dateArrayRemoved);
+  // const titleObj = applyColumnIndexToInfoArray(COLUMN_FOR_TITLE_1ST, siteTitleArrayRemoved);
+  // const urlObj   = applyColumnIndexToInfoArray(COLUMN_FOR_URL_1ST, urlArrayRemoved);
+  const integratedObj = integrateObjToWriteGSS(dateObj, titleObj, urlObj);
   const isWritten    = writeInfoToGSS(integratedObj);
   let isRemovedAll = false;
   if(isWritten === true){
@@ -61,7 +79,7 @@ async function writeSheetAndRemoveFilesIos(folderId=TEMPORARY_TEXT_FOLDER_ID_OF_
   // dateArray      = [0,1,2,4];
   // siteTitleArray = [2,4,8,9];
   // urlArray       = [5,7,1,5];
-  
+
   const dateObj  = applyColumnIndexToInfoArray(COLUMN_FOR_DATE_1ST, dateArray); // できた
   const titleObj = applyColumnIndexToInfoArray(COLUMN_FOR_TITLE_1ST, siteTitleArray); // できた
   const urlObj   = applyColumnIndexToInfoArray(COLUMN_FOR_URL_1ST, urlArray); // できた
@@ -80,7 +98,7 @@ async function writeSheetAndRemoveFilesIos(folderId=TEMPORARY_TEXT_FOLDER_ID_OF_
 */
 async function main() {
   const isRemovedAllInGeneralFolder = writeSheetAndRemoveFiles(TEMPORARY_TEXT_FOLDER_ID, ["text/plain"])
-  const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(TEMPORARY_TEXT_FOLDER_ID_OF_IOS, ["text/plain", "text/html"]);
+  // const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(TEMPORARY_TEXT_FOLDER_ID_OF_IOS, ["text/plain", "text/html"]);
 }
 
 // main execution for the other supplimental process.
@@ -143,6 +161,3 @@ function inputFalseToEmptyCell(){
   inputFalseMemorandumToEmptyCell(SHEET_NAME_DISSEMINATING_1ST);
   inputFalseTodoToEmptyCell(SHEET_NAME_DISSEMINATING_1ST);
 }
-
-
-

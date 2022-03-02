@@ -94,7 +94,7 @@ function getTextArrayFromFileIdArray(fileIdArray) {
     file = DriveApp.getFileById(id);
     let text = file.getBlob().getDataAsString("utf-8");
     texts.push(text);
-  });  
+  });
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
   console.log(texts);
   console.log("#################################")
@@ -126,7 +126,7 @@ function integrateObjToWriteGSS(...objects) {
   const funcName = "integrateObjToWriteGSS";
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
   console.log(objects);
-  
+
   // Length of object in objects must be same each other: Start ----------------------------------------------------
   console.log(Object.keys(objects))
   let arrayOfKey = [];
@@ -154,7 +154,7 @@ function integrateObjToWriteGSS(...objects) {
     for(let k = j + 1; k < arrayOfKey.length; k++){
       lengthOfObject2 = objWithoutArray[arrayOfKey[k]].length;
       console.log("L2: " + lengthOfObject2)
-      
+
       if(lengthOfObject1 !== lengthOfObject2){
         console.log(`${funcName}: ${getStrRepeatedToMark("d")}: `);
         console.log(`Length of objects is different: lengthOfObject1: ${lengthOfObject1} != lengthOfObject2: ${lengthOfObject2}`);
@@ -225,7 +225,7 @@ function integrateObjToWriteGSS(...objects) {
     }
     recordsArray.push(records);
   });
-  
+
   console.log(`${funcName}: ${getStrRepeatedToMark("i")}: `);
   console.log(recordsArray);
 
@@ -401,7 +401,7 @@ function getUrlArrayByFileDomStructArray(dosStructArray) {
     // let url = String(Parser.data(domStruct).from("<meta property=\"og:url\" content=\"").to("\"/>").iterate())
     url = getUrlByDomStruct(domStruct);
     urls.push(url);
-  });  
+  });
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
   console.log(urls);
   return urls;
@@ -422,7 +422,7 @@ function getSiteTitleArrayFromFileDomStructArray(dosStructArray) {
     // let siteTitle = String(Parser.data(domStruct).from("<title>").to("</title>").iterate())
     siteTitle = getSiteTitleByDomStruct(domStruct);
     siteTitles.push(siteTitle);
-  });  
+  });
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
   console.log(siteTitles);
   return siteTitles;
@@ -436,7 +436,7 @@ function getSiteTitleArrayFromFileDomStructArray(dosStructArray) {
 */
 function getUrlByDomStruct(domStruct){
   const funcName = "getUrlByDomStruct";
-  
+
   let url = "";
   if(domStruct.length < MARGIN_FOR_CHECK_HTML_PARSING){
     console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
@@ -546,8 +546,3 @@ function getTextByDomStruct(domStruct, textPairs, banInitialWords, marginForChec
 // sub routine: end ---------------------------------------------------------------------
 
 // by dom struct functions: end ------------------------------------------------------------------------------------------------------------------
-
-
-// ----------------------------------------------------------------------------------------------------------------------------------------------------
-
-

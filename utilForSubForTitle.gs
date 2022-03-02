@@ -1,4 +1,4 @@
-// util for sub to input title
+// utilForSubForTitle.gs
 
 // for inputterValueToEmptyCell --------------------------------------------------------------------------------------------------------------------
 
@@ -109,6 +109,12 @@ function getValueArrayFromRowArray(sheetName, rowArray, targetColumn){
 
 // for getSiteTitleArrayFromUrlArray --------------------------------------------------------------------------------------------------------------------
 
+class ResMock{
+  getContentText(value){
+    return `<title>${REPLACING_WORD_WHEN_TITLE_IS_NULL}</title>`
+  }
+}
+
 /**
    * @param {string[]} urlArray
    * @return {string[]} siteTitles
@@ -117,19 +123,23 @@ async function getSiteTitleArrayFromUrlArray(urlArray) {
   const funcName = "getSiteTitleArrayFromUrlArray";
   let siteTitles = [];
   let executionTime = 0;
-  const maxExecutionTime = 300 * 1000; // 5 minutes. (max time of standard GAS is 6 minutes.)
+  const maxMinute = 5; // 5 minutes. (max time of standard GAS is 6 minutes.)
+  const maxExecutionTime = maxMinute * 60 * 1000;
   await Promise.all(
     urlArray.map(async url => {
       let exeStart = new Date();
 
       let res = getResponseUntilMaxRetries(url, 5);
       if (res === null){
-        return [];
+        res = ResMock();
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        // return [];
       }
       let contentText = res.getContentText("UTF-8");
       let siteTitle = String(Parser.data(contentText).from("<title>").to("</title>").iterate());
       console.log(siteTitle);
       siteTitle = siteTitle.replace(/\r?\n/g, "");
+      console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
       siteTitle = getStringWithFilters(siteTitle, url);
 
       // TODO: 上の処理をこの関数で実行されるようにする。
@@ -138,9 +148,10 @@ async function getSiteTitleArrayFromUrlArray(urlArray) {
       siteTitles.push(siteTitle);
       let exeEnd = new Date();
       executionTime += exeEnd - exeStart;
+      console.log("????????????????????????????????????????????????????????????")
       if(executionTime > maxExecutionTime){
         console.log(`${funcName}: executionTime is over maxExecutionTime.`)
-        return false;
+        return [];
       }
     })
   );
@@ -151,6 +162,7 @@ async function getSiteTitleArrayFromUrlArray(urlArray) {
 
 // request functions: start ------------------------------------------------------------------------------------------------------------------
 
+// TODO: " https://link.medium....."みたいにresponseがnullだった場合の処理を調べる。
 /**
    * @param {string} url
    * @param {number} maxRetries
@@ -211,6 +223,7 @@ function getStringWithFilters(targetString, targetUrl){
   returnString = getStringWithLettersFileter(targetString, targetUrl);
   returnString = getStringWithKeywordFilter(returnString, "GIGAZINE");
   // returnString = await getStringWithYoutubeFilter(returnString, url);
+  returnString = getStringWithForNullFilter(returnString);
   return returnString;
 }
 
@@ -270,8 +283,19 @@ function getStringWithYoutubeFilter(targetString, url){
   // return filteredString;
 }
 
+/**
+   * @param {string} targetString
+   * @return {string} returnWord
+*/
+function getStringWithForNullFilter(targetString){
+  const word = REPLACING_WORD_WHEN_TITLE_IS_NULL;
+  let returnWord = "";
+  if (targetString === ""){
+    returnWord = word;
+  }else{
+    returnWord = targetString;
+  }
+  return returnWord;
+}
+
 // filter functions: end ------------------------------------------------------------------------------------------------------------------
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-

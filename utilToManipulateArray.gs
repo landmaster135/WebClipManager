@@ -1,4 +1,4 @@
-// util to manipulate array
+// utilToManipulateArray.gs
 
 /**
    * @param {string[]} targetArray
