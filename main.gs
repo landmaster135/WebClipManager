@@ -98,7 +98,7 @@ async function writeSheetAndRemoveFilesIos(folderId=TEMPORARY_TEXT_FOLDER_ID_OF_
 */
 async function main() {
   const isRemovedAllInGeneralFolder = writeSheetAndRemoveFiles(TEMPORARY_TEXT_FOLDER_ID, ["text/plain"])
-  // const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(TEMPORARY_TEXT_FOLDER_ID_OF_IOS, ["text/plain", "text/html"]);
+  const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(TEMPORARY_TEXT_FOLDER_ID_OF_IOS, ["text/plain", "text/html"]);
 }
 
 // main execution for the other supplimental process.

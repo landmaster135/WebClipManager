@@ -495,7 +495,10 @@ function getSiteTitleByDomStruct(domStruct){
   let textPair2 = {};
   textPair2["startText"] = "<meta property=\"og:title\" content=\"";
   textPair2["endTexts"] = ["\"/>", "\">", "\"/ >", "\" />"];
-  const textPairs = [textPair1, textPair2];
+  let textPairForMedium = {};
+  textPairForMedium["startText"] = "<title data-rh=\"true\">";
+  textPairForMedium["endTexts"] = ["</title>"];
+  const textPairs = [textPair1, textPair2, textPairForMedium];
   const banInitialWords = ["head><meta charset=\"", "<!DOCTYPE html>", "head><meta "];
   siteTitle = getTextByDomStruct(domStruct, textPairs, banInitialWords);
   // const siteTitle = getTextByDomStruct(domStruct, startText, endTexts);
