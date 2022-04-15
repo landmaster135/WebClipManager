@@ -34,7 +34,7 @@ function listFormated(listReadFromGss) {
    * @customfunction
 */
 function getIdToReadActualInGss(sheetName, columnForId, idToRead=801) {
-  const funcName = "get_id_to_read_actual_in_GSS";
+  const funcName = "getIdToReadActualInGss";
 
   // declare list for warning message.
   const warningMessage = "Warning: Number of row passing over \"id_to_read\". Tweak me.";
