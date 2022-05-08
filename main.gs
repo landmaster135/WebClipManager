@@ -1,4 +1,17 @@
 // main process
+/**
+   * @param {string} folderId
+   * @param {string[]} mimeTypes
+   * @return {null} return
+*/
+function onOpen() {
+  SpreadsheetApp
+    .getActiveSpreadsheet()
+    .addMenu('一括入力処理', [
+      {name: "空白タイトルに一括入力", functionName: "inputTitlesToEmptyCell"},
+      {name: "空白セルにfalseを一括入力", functionName: "inputFalseToEmptyCell"},
+    ]);
+}
 
 /**
    * @param {string} folderId
