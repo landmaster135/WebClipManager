@@ -1,24 +1,11 @@
 // main process
-/**
-   * @param {string} folderId
-   * @param {string[]} mimeTypes
-   * @return {null} return
-*/
-function onOpen() {
-  SpreadsheetApp
-    .getActiveSpreadsheet()
-    .addMenu('一括入力処理', [
-      {name: "空白タイトルに一括入力", functionName: "inputTitlesToEmptyCell"},
-      {name: "空白セルにfalseを一括入力", functionName: "inputFalseToEmptyCell"},
-    ]);
-}
 
 /**
    * @param {string} folderId
    * @param {string[]} mimeTypes
    * @return {null} return
 */
-async function writeSheetAndRemoveFiles(folderId=TEMPORARY_TEXT_FOLDER_ID, mimeTypes=["text/plain"]){
+async function writeSheetAndRemoveFiles(folderId=LandGasterId.TEMPORARY_TEXT_FOLDER_ID, mimeTypes=["text/plain"]){
   const funcName = "writeSheetAndRemoveFiles";
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
   const textFileIdArray = getFileIdArrayInTheFolder(folderId, mimeTypes);
@@ -71,7 +58,7 @@ async function writeSheetAndRemoveFiles(folderId=TEMPORARY_TEXT_FOLDER_ID, mimeT
    * @param {string[]} mimeTypes
    * @return {null} return
 */
-async function writeSheetAndRemoveFilesIos(folderId=TEMPORARY_TEXT_FOLDER_ID_OF_IOS, mimeTypes=["text/plain", "text/html"]){
+async function writeSheetAndRemoveFilesIos(folderId=LandGasterId.TEMPORARY_TEXT_FOLDER_ID_OF_IOS, mimeTypes=["text/plain", "text/html"]){
   const funcName = "writeSheetAndRemoveFilesIos";
   const textFileIdArray = getFileIdArrayInTheFolder(folderId, mimeTypes); // できた
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
@@ -111,7 +98,7 @@ async function writeSheetAndRemoveFilesIos(folderId=TEMPORARY_TEXT_FOLDER_ID_OF_
 */
 async function main() {
   const isRemovedAllInGeneralFolder = writeSheetAndRemoveFiles(TEMPORARY_TEXT_FOLDER_ID, ["text/plain"])
-  const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(TEMPORARY_TEXT_FOLDER_ID_OF_IOS, ["text/plain", "text/html"]);
+  const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(LandGasterId.TEMPORARY_TEXT_FOLDER_ID_OF_IOS, ["text/plain", "text/html"]);
 }
 
 // main execution for the other supplimental process.

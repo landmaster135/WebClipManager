@@ -327,7 +327,7 @@ function removeFilesFromFileIdArray(fileIdArray, mimeTypes){
 
   let isExistFileArray = [];
   fileIdArray.forEach(id => {
-    let isExistFile = isExistFileViaFileIdInFolder(id, TEMPORARY_TEXT_FOLDER_ID, mimeTypes);
+    let isExistFile = isExistFileViaFileIdInFolder(id, LandGasterId.TEMPORARY_TEXT_FOLDER_ID, mimeTypes);
     console.log(`${funcName}: ${getStrRepeatedToMark("c")}: `);
     console.log(`isExistFile is ${isExistFile}`);
     isExistFileArray.push(isExistFile);
