@@ -5,7 +5,7 @@
    * @param {string[]} mimeTypes
    * @return {null} return
 */
-async function writeSheetAndRemoveFiles(folderId=LandGasterId.TEMPORARY_TEXT_FOLDER_ID, mimeTypes=["text/plain"]){
+async function writeSheetAndRemoveFiles(folderId=LandGasterId.TEMPORARY_TEXT_FOLDER_ID(), mimeTypes=["text/plain"]){
   const funcName = "writeSheetAndRemoveFiles";
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
   const textFileIdArray = getFileIdArrayInTheFolder(folderId, mimeTypes);
@@ -58,7 +58,7 @@ async function writeSheetAndRemoveFiles(folderId=LandGasterId.TEMPORARY_TEXT_FOL
    * @param {string[]} mimeTypes
    * @return {null} return
 */
-async function writeSheetAndRemoveFilesIos(folderId=LandGasterId.TEMPORARY_TEXT_FOLDER_ID_OF_IOS, mimeTypes=["text/plain", "text/html"]){
+async function writeSheetAndRemoveFilesIos(folderId=LandGasterId.TEMPORARY_TEXT_FOLDER_ID_OF_IOS(), mimeTypes=["text/plain", "text/html"]){
   const funcName = "writeSheetAndRemoveFilesIos";
   const textFileIdArray = getFileIdArrayInTheFolder(folderId, mimeTypes); // できた
   console.log(`${funcName}: ${getStrRepeatedToMark("a")}: `);
@@ -97,8 +97,8 @@ async function writeSheetAndRemoveFilesIos(folderId=LandGasterId.TEMPORARY_TEXT_
    * @return {null} return
 */
 async function main() {
-  const isRemovedAllInGeneralFolder = writeSheetAndRemoveFiles(TEMPORARY_TEXT_FOLDER_ID, ["text/plain"])
-  const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(LandGasterId.TEMPORARY_TEXT_FOLDER_ID_OF_IOS, ["text/plain", "text/html"]);
+  const isRemovedAllInGeneralFolder = writeSheetAndRemoveFiles(LandGasterId.TEMPORARY_TEXT_FOLDER_ID(), ["text/plain"])
+  const isRemovedAllInIosFolder = writeSheetAndRemoveFilesIos(LandGasterId.TEMPORARY_TEXT_FOLDER_ID_OF_IOS(), ["text/plain", "text/html"]);
 }
 
 // main execution for the other supplimental process.
