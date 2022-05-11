@@ -1,6 +1,6 @@
 /**
    * Get
-   * @param {} e
+   * @param {string} param
    * @return {HtmlOutput}
 */
 function getData(param){
