@@ -7,6 +7,7 @@ function onOpen() {
     .addMenu('一括入力処理', [
       {name: "空白タイトルに一括入力", functionName: "inputTitlesToEmptyCell"},
       {name: "空白セルにfalseを一括入力", functionName: "inputFalseToEmptyCell"},
+      {name: "DriveにあるURLを追加", functionName: "main"}
     ]);
 }
 
